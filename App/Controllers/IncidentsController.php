@@ -5,12 +5,12 @@ use Emeset\Contracts\Http\Request;
 use Emeset\Contracts\Http\Response;
 use Emeset\Contracts\Container;
 use App\Models\Incident;
-
+//test
 class IncidentsController
 {
     protected $db;
     protected $incidentModel;
-
+//test
     public function __construct($db)
     {
         $this->db = $db;

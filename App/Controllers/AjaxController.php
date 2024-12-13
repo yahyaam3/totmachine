@@ -1,6 +1,6 @@
 <?php
 namespace App\Controllers;
-
+//test
 use Emeset\Contracts\Http\Request;
 use Emeset\Contracts\Http\Response;
 use Emeset\Contracts\Container;
@@ -12,14 +12,14 @@ class AjaxController
     protected $db;
     protected $userModel;
     protected $machineModel;
-
+//test
     public function __construct($db)
     {
         $this->db = $db;
         $this->userModel = new User($db);
         $this->machineModel = new Machine($db);
     }
-
+//test
     public function randomUser(Request $request, Response $response, Container $container)
     {
         $role = $request->get(INPUT_GET, "role");
@@ -29,7 +29,7 @@ class AjaxController
         $data = file_get_contents("https://randomuser.me/api/");
         $json = json_decode($data, true);
         $userRandom = $json['results'][0];
-
+//test
         $name = ucfirst($userRandom['name']['first']);
         $surname = ucfirst($userRandom['name']['last']);
         $email = $userRandom['email'];
