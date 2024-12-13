@@ -1,0 +1,8 @@
+#No es guardaran aquests fitxers a Git ni Github
+*.tar
+#No es guardaran les variables d'entorn a Git ni Github, així no es podran veure les contrasenyes
+.env
+
+vendor
+node_modules
+.env
