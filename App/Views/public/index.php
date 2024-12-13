@@ -22,7 +22,7 @@
             <!-- Contenedor de imágenes -->
             <div id="carousel-images" class="flex transition-transform duration-700 ease-in-out w-full h-full">
                 <img src="/images/ma1.jpg" class="w-full h-full object-cover flex-shrink-0" alt="Image 1">
-                <img src="/images/ma2.jpg" class="w-full h-full object-cover flex-shrink-0" alt="Image 2">
+                <img src="/images/ma4.jpg" class="w-full h-full object-cover flex-shrink-0" alt="Image 2">
                 <img src="/images/ma3.jpg" class="w-full h-full object-cover flex-shrink-0" alt="Image 3">
             </div>
             <!-- Controles -->
