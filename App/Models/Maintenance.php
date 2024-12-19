@@ -33,4 +33,20 @@ class Maintenance extends BaseModel
         $stmt->execute([$id_machine]);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    public function updateMaintenance($id, $type, $description, $date, $time_spent)
+    {
+        $stmt = $this->db->prepare("UPDATE Maintenance SET type = ?, description = ?, date = ?, time_spent = ? WHERE id_maintenance = ?");
+        return $stmt->execute([$type, $description, $date, $time_spent, $id]);
+    }
+
+    public function deleteMaintenance($id)
+    {
+        $stmt = $this->db->prepare("DELETE FROM Maintenance WHERE id_maintenance = ?");
+        return $stmt->execute([$id]);
+    }
+
+    public function getLastInsertId() {
+        return $this->db->lastInsertId();
+    }
 }

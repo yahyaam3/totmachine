@@ -1,21 +1,24 @@
 <IfModule mod_rewrite.c>
-    <IfModule mod_negotiation.c>
-        Options -MultiViews -Indexes
-    </IfModule>
-
+    # Ensure mod_rewrite is enabled
     RewriteEngine On
-
-    # Handle Authorization Header
+    
+    # Handle Authorization Header (optional)
     RewriteCond %{HTTP:Authorization} .
     RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+    
+    # Set the base path if your app is in a subdirectory (uncomment if needed)
+    # RewriteBase /mysite/
 
-    # Redirect Trailing Slashes If Not A Folder...
+    # Redirect trailing slashes (except for directories)
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_URI} (.+)/$
     RewriteRule ^ %1 [L,R=301]
 
-    # Send Requests To Front Controller...
+    # Rewrite requests to index.php if not a file or directory
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^ index.php [L]
 </IfModule>
+
+# Optional: If using PHP as CGI or FPM, you may need to add this line to set the correct PHP handler
+# AddHandler application/x-httpd-php .php

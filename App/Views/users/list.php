@@ -1,5 +1,8 @@
 <h2 class="text-xl mb-4">Users</h2>
-<a href="/users/add" class="bg-green-500 text-white p-2 rounded">Add User</a>
+<!-- Cambia el enlace por un botón -->
+<button type="button" class="add-user bg-green-600 text-white px-4 py-2 rounded-lg font-medium hover:bg-green-700">
+    Add User
+</button>
 <a href="#" id="randomUserBtn" data-role="TECHNICAL" class="bg-yellow-500 text-white p-2 rounded ml-2">Create Random
     Technical</a>
 <table class="w-full mt-4 border-collapse">
@@ -14,7 +17,7 @@
     </thead>
     <tbody>
         <?php foreach ($users as $u): ?>
-            <tr class="border-b">
+            <tr class="border-b" data-user-id="<?= $u['id_user']; ?>">
                 <td><?= $u['name'] . " " . $u['surname']; ?></td>
                 <td><?= $u['username']; ?></td>
                 <td><?= $u['email']; ?></td>

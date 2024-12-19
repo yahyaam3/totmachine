@@ -39,6 +39,16 @@ class Machine extends BaseModel
     }
 
     /**
+     * Fetches a machine by its ID - used for validation.
+     */
+    public function findMachineById($id)
+    {
+        $stmt = $this->db->prepare("SELECT id_machine FROM Machines WHERE id_machine = ?");
+        $stmt->execute([$id]);
+        return $stmt->fetch(PDO::FETCH_ASSOC); // Retorna la fila si existeix, o false si no
+    }
+
+    /**
      * Lists all machines with technician usernames.
      */
     public function listMachines()
@@ -97,5 +107,29 @@ class Machine extends BaseModel
     {
         $stmt = $this->db->prepare("DELETE FROM Machines WHERE id_machine = ?");
         return $stmt->execute([$id]);
+    }
+
+    /**
+     * Updates a machine's data.
+     */
+    public function updateMachine($id, $model, $manufacturer, $serial)
+    {
+        $stmt = $this->db->prepare("UPDATE Machines SET model = ?, manufacturer = ?, serial_number = ? WHERE id_machine = ?");
+        return $stmt->execute([$model, $manufacturer, $serial, $id]);
+    }
+
+    public function getLastInsertId() {
+        return $this->db->lastInsertId();
+    }
+
+    public function getUnassignedMachines() {
+        $stmt = $this->db->query("SELECT * FROM Machines WHERE technician_id IS NULL");
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function getTechnicianMachines($technicianId) {
+        $stmt = $this->db->prepare("SELECT * FROM Machines WHERE technician_id = ?");
+        $stmt->execute([$technicianId]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 }

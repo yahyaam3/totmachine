@@ -19,4 +19,4 @@ class AdminMiddleware {
         $response = BaseMiddleware::next($request, $response, $container, $next);
         return $response;
     }
-}
+} 

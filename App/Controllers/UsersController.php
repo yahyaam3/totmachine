@@ -99,4 +99,59 @@ class UsersController
         }
         return $response;
     }
+
+    public function ajaxEditForm(Request $request, Response $response, Container $container)
+    {
+        $id = $request->get(INPUT_GET, "id");
+    
+        if (!$id || !is_numeric($id)) {
+            echo json_encode(["result" => "error", "message" => "Invalid User ID"]);
+            exit;
+        }
+    
+        $user = $this->userModel->getUserById($id);
+    
+        if ($user) {
+            ob_start();
+            include __DIR__ . "/../Views/modal/edit_user_form.php";
+            $html = ob_get_clean();
+            echo $html;
+        } else {
+            echo json_encode(["result" => "error", "message" => "User not found"]);
+        }
+        exit;
+    }
+    
+    public function ajaxUpdate(Request $request, Response $response, Container $container)
+    {
+        $id = $request->get(INPUT_POST, "id");
+        $name = $request->get(INPUT_POST, "name");
+        $surname = $request->get(INPUT_POST, "surname");
+        $email = $request->get(INPUT_POST, "email");
+
+        if ($this->userModel->updateUser($id, $name, $surname, $email)) {
+            echo json_encode(["result" => "ok"]);
+        } else {
+            echo json_encode(["result" => "error", "message" => "Failed to update user"]);
+        }
+        exit;
+    }
+    public function ajaxDelete(Request $request, Response $response, Container $container)
+    {
+        $id = $request->get(INPUT_POST, "id");
+
+        if (!$id || !is_numeric($id)) {
+            echo json_encode(["result" => "error", "message" => "Invalid ID"]);
+            exit;
+        }
+
+        $deleted = $this->userModel->deleteUser($id);
+
+        if ($deleted) {
+            echo json_encode(["result" => "ok", "id" => $id]);
+        } else {
+            echo json_encode(["result" => "error", "message" => "Failed to delete user"]);
+        }
+        exit;
+    }
 }

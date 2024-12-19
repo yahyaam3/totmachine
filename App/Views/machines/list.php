@@ -20,9 +20,9 @@
 
             <!-- Botón Añadir Máquina -->
             <?php if ($_SESSION['user_role'] == 'SUPERVISOR' || $_SESSION['user_role'] == 'ADMINISTRATOR'): ?>
-                <a href="/machines/add" class="bg-green-600 text-white px-4 py-2 rounded-lg font-medium hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500">
+                <button type="button" class="add-machine bg-green-600 text-white px-4 py-2 rounded-lg font-medium hover:bg-green-700">
                     Add Machine
-                </a>
+                </button>
             <?php endif; ?>
 
             <!-- Campo de búsqueda -->
@@ -33,7 +33,7 @@
             <div id="searchResults" class="mt-4"></div>
 
             <!-- Mapa Leaflet -->
-            <div id="map" class="w-full h-96 mt-6 rounded-lg border"></div>
+            <div id="map" class="z-0 w-full h-96 mt-6 rounded-lg border"></div>
 
             <!-- Tabla de Máquinas -->
             <table class="w-full mt-6 border border-gray-300 rounded-lg shadow-sm">
@@ -48,7 +48,8 @@
                 </thead>
                 <tbody id="machinesTable" class="divide-y divide-gray-200">
                     <?php foreach ($machines as $m): ?>
-                        <tr class="hover:bg-gray-50">
+                        <!-- machines/list.php -->
+                        <tr data-machine-id="<?= $m['id_machine']; ?>">
                             <td class="p-4 text-gray-700"><?= $m['model']; ?></td>
                             <td class="p-4 text-gray-700"><?= $m['manufacturer']; ?></td>
                             <td class="p-4 text-gray-700"><?= $m['serial_number']; ?></td>
